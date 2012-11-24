@@ -24,10 +24,13 @@ public class XmlEncryptionTest {
         encrypter.encryptXmlDocument("xml/library.xml", 
                                      "xml/encryptedDocument.xml",
                                      encryptKey.getKey());
+        encryptKey.saveToFile("encryption.key");
         
+        EncryptionKey decryptKey = new EncryptionKey();
+        decryptKey.loadFromFile("encryption.key");
         XmlDecryption decrypter = new XmlDecryption();
         decrypter.decryptXmlDocument("xml/encryptedDocument.xml",
                                      "xml/originalDocument.xml",
-                                     encryptKey.getKey());
+                                     decryptKey.getKey());
     }
 }
